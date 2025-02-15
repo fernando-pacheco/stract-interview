@@ -35,3 +35,35 @@ class StractRest:
             page += 1
             
         return all_items
+    
+    def get_fields(self, platform):
+        fields = self.fetch_paginated_data("/api/fields", params={"platform": platform}, key="fields")
+        return [field["value"] for field in fields]
+    
+    def get_account_insights(self, platform, account_id, account_token, fields):
+        response = self.fetch_data("/api/insights", params={
+            "platform": platform,
+            "account": account_id,
+            "token": account_token,
+            "fields": ",".join(fields)
+        })
+        return response.get("insights", [])
+    
+    def get_accounts(self, platform):
+        return self.fetch_paginated_data("/api/accounts", params={"platform": platform}, key="accounts")
+    
+    def get_platforms(self):
+        return self.fetch_paginated_data("/api/platforms", key="platforms")
+    
+    def get_insights(self, platform):
+        accounts = self.get_accounts(platform)
+        fields = self.get_fields(platform)        
+        insights = []
+
+        for account in accounts:
+            account_insights = self.get_account_insights(
+                platform, account.get("id"), account.get("token"), fields
+            )
+            insights.extend(account_insights)        
+
+        return insights
