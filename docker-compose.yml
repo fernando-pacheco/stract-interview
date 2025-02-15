@@ -1,0 +1,9 @@
+services:
+  stract:
+    image: $IMAGE
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_APP=main.py
+      - API_URL=$API_URL
+      - API_TOKEN=$API_TOKEN
