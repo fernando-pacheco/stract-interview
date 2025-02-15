@@ -123,12 +123,6 @@ Platform,Ad Name,Clicks,Impressions,Spend
 Facebook,,30,3000,150
 ```
 
-📌 Observações
+## 📌 Observações
 
-O campo "Cost per Click" para Google Analytics será calculado como spend / clicks.
-
-A API utiliza paginação; a navegação é feita via parâmetro page.
-
-📫 Contato
-
-Desenvolvido por Seu Nome.
+Caso queira guardar o conteúdo das requisições, basta usar a `URL + ENDPOINT` requerida no navegador, isso fará com que seja realizado o download de um arquivo CSV contendo a resposta da requisição.
